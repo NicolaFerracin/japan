@@ -1,0 +1,56 @@
+/* body */
+body {
+  background-image: url('../img/bg_1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* body opacity */
+body:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.white {
+  color: white !important;
+}
+
+/* navigation buttons */
+#accessButtons {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+#navigationButtons {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+}
+/* navigation buttons end */
+
+/* view */
+.view {
+  margin-top: 150px;
+}
+
+/* home view header */
+.header {
+    font-size: 150px;
+    background-color: #D05A6E;
+}
+
+#arrow-down {
+	width: 0;
+	height: 0;
+	border-left: 200px solid transparent;
+	border-right: 200px solid transparent;
+	border-top: 100px solid #D05A6E;
+}
