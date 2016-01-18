@@ -1,4 +1,4 @@
-app.controller('LoginController', function($scope, $http, $location) {
+app.controller('LoginController', function($scope, $http, $window) {
 
   // booleans to show/hide alerts
   $scope.submitted = false;
@@ -26,8 +26,8 @@ app.controller('LoginController', function($scope, $http, $location) {
     $http.post("/api/login", user)
     .success(function (data, status) {
       console.log('Successful login.');
-      // if successfull redirect to /
-      $location.path("/");
+      // if successfull, redirect to / with full page reload
+      $window.location.href = "/";
     })
     .error(function (data) {
       console.log('Error: ' + data);

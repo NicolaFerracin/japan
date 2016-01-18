@@ -1,9 +1,14 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
 /* body */
 body {
   background-image: url('../img/bg_1.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  margin: 0 0 100px;
 }
 
 /* body opacity */
@@ -22,19 +27,31 @@ body:after {
   color: white !important;
 }
 
-/* navigation buttons */
+/* navigation buttons and footer start */
 #accessButtons {
   position: fixed;
   right: 10px;
   top: 10px;
+  z-index: 1;
 }
 
 #navigationButtons {
   position: fixed;
   left: 10px;
   top: 10px;
+  z-index: 1;
 }
-/* navigation buttons end */
+
+#footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: auto;
+  width: 100%;
+  background-color: #222;
+  padding: 20px;
+}
+/* navigation buttons and footer end */
 
 /* view */
 .view {
@@ -43,14 +60,60 @@ body:after {
 
 /* home view header */
 .header {
-    font-size: 150px;
-    background-color: #D05A6E;
+  font-size: 150px;
+  background-color: #D05A6E;
+  padding: 50px;
 }
 
 #arrow-down {
-	width: 0;
-	height: 0;
-	border-left: 200px solid transparent;
-	border-right: 200px solid transparent;
-	border-top: 100px solid #D05A6E;
+  width: 0;
+  height: 0;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-top: 100px solid #D05A6E;
+}
+
+/* start masonry */
+.grid {
+  margin: 50px 100px 50px 100px;
+  z-index: 0;
+}
+
+.grid-item {
+  background: #D26;
+  float: left;
+  width: 200px;
+  height: 200px;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  margin-bottom: 5px;
+}
+
+.grid-item--height2 {
+  height: 210px;
+}
+
+.grid-item--height3 {
+  height: 220px;
+}
+
+.grid-item--height4 {
+  height: 230px;
+}
+
+.grid-item--height5 {
+  height: 240px;
+}
+
+/* fitting the images */
+.fit-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 90%;
+  max-height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
 }

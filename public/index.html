@@ -17,26 +17,30 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 	<!-- Include the AngularJS routing library -->
 	<script src="https://code.angularjs.org/1.2.28/angular-route.min.js"></script>
+	<!-- include masonry  and images loaded -->
+	<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.js"></script>
+	<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 
 </head>
 <body ng-app="BoilerplateApp" ng-controller="IndexController">
 
-	<!-- TODO inser navigation buttons -->
-	<div id="navigationButtons" class="">
+	<div id="navigationButtons">
 		<a class="btn btn-primary" href="/">JapanWonders</a>
 		<a class="btn btn-default" href="/signup" ng-show="userIsLoggedIn">My Wonders</a>
 	</div>
-	<div id="accessButtons" ng-hide="userIsLoggedIn">
+	<div id="accessButtons" ng-hide="userLoggedIn">
 		<a class="btn btn-primary" href="/login">Login</a>
 		<a class="btn btn-default" href="/signup">Signup</a>
 	</div>
-	<div id="accessButtons" ng-show="userIsLoggedIn">
-		<a class="btn btn-alert" href="/logout">Logout</a>
+	<div id="accessButtons" ng-show="userLoggedIn">
+		<a class="btn btn-danger" href="/logout">Logout</a>
 	</div>
 
 	<div ng-view class="view white"></div>
 
-	<!-- TODO insert footer -->
+	<div id="footer" class="white" align=center>
+		<p>Yo yo this is a fooooooooooter!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+	</div>
 
 	<!-- Modules -->
 	<script src="js/app.js"></script>
