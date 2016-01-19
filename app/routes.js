@@ -1,19 +1,18 @@
-// TODO change the Thing name here and in the models folder to follow the name Object you are creating
-var Thing = require('./models/thing');  // load the thing mongoose model - change as needed
+var Wonder = require('./models/wonder');  // load the wonder mongoose model
 var User = require('./models/user');  // load the User mongoose model for passport.js authentication
 
 module.exports = function(app, passport) {
 	// api ---------------------------------------------------------------------
 	// create thing
-	app.post('/api/things', function(req, res) {
-		Thing.create({
-			// TODO populate the obj
-		}, function(err, thing) {
+	app.post('/api/wonder', function(req, res) {
+		var wonder = new Wonder(req.body);
+		wonder.save(function (err) {
 			if (err) {
 				res.send(err);
+			} else {
+				res.sendStatus(200);
 			}
-			res.json(thing);
-		});
+		})
 	});
 
 	// get all things
@@ -28,16 +27,18 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	// get thing by parameter
-	app.get('/api/things/:parameter', function(req, res) {
-		// use mongoose to get all the things using a paramater
-		// TODO Populate the search obj with the needed parameter
-		Thing.find({}, function(err, things) {
+	// get thing by user
+	app.get('/api/wonders/:user', function(req, res) {
+		// use mongoose to get all the wonders by username
+		Wonder.find({ user : req.params.user}, function(err, wonders) {
 			// if err, send it
 			if (err) {
 				res.send(err);
+			} else if (!wonders) {
+				res.send("No wonders found");
+			} else {
+				res.json(wonders);
 			}
-			res.json(things);
 		});
 	});
 

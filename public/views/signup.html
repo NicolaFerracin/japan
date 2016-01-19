@@ -9,6 +9,10 @@
         <input type="email" class="form-control" name="email" placeholder="Insert Email" ng-model="account.email" required>
       </div>
       <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username" placeholder="Insert Username" ng-model="account.username" required>
+      </div>
+      <div class="form-group">
         <label>Password</label>
         <input type="password" class="form-control" name="password" placeholder="Insert Password" ng-model="account.password" required>
       </div>
@@ -20,7 +24,7 @@
         <input type="password" class="form-control" name="password_repeat" placeholder="Repeat Password" ng-model="account.repeatPassword" required>
       </div>
       <span ng-show="showErrorAlert" class="alert">
-        <p>Uh oh, it looks like this email is already taken. Try with a different one or <a href="/login">Login here</a>!</p>
+        <p>Uh oh, it looks like this email or the username is already taken. Try with a different one or <a href="/login">Login here</a>!</p>
       </span>
       <div>
         <button ng-disabled="signupForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Sign Up</button>
@@ -30,5 +34,4 @@
       <span>You already have an account? <a href="/login">Login</a>!</span>
     </div>
   </div>
-</div>
 </div>

@@ -1,14 +1,27 @@
+/* Define a custom web font */
+@font-face {
+  font-family: 'Osaka';
+  src: url('../fonts/osaka-re.ttf');
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 /* body */
 body {
-  background-image: url('../img/bg_1.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  margin: 0 0 100px;
+  background: url('../img/bg_1.jpg') no-repeat center fixed;
+  background-size: cover;
+  margin-bottom: 100px;
+}
+
+.view {
+  margin-bottom: 300px;
+}
+
+/* avoid rows to stretch over the window width */
+.row {
+  max-width: 100%;
 }
 
 /* body opacity */
@@ -23,8 +36,17 @@ body:after {
   z-index: -1;
 }
 
+/* colors */
 .white {
   color: white !important;
+}
+
+.black {
+  color: black !important;
+}
+
+.red {
+  color: red !important;
 }
 
 /* navigation buttons and footer start */
@@ -33,6 +55,11 @@ body:after {
   right: 10px;
   top: 10px;
   z-index: 1;
+}
+
+#accessButtons span {
+  margin-right: 20px;
+  font-size: 150%;
 }
 
 #navigationButtons {
@@ -48,7 +75,7 @@ body:after {
   bottom: 0;
   height: auto;
   width: 100%;
-  background-color: #222;
+  background: rgba(0, 0, 0, 0.8);
   padding: 20px;
 }
 /* navigation buttons and footer end */
@@ -60,9 +87,10 @@ body:after {
 
 /* home view header */
 .header {
-  font-size: 150px;
+  font-size: 1500%;
   background-color: #D05A6E;
-  padding: 50px;
+  padding-bottom: 30px;
+  font-family: 'Osaka';
 }
 
 #arrow-down {
@@ -80,40 +108,34 @@ body:after {
 }
 
 .grid-item {
-  background: #D26;
+  word-wrap: break-word;
+  border-radius: 5%;
+  background: #D7C4BB;
   float: left;
-  width: 200px;
-  height: 200px;
-  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  max-width: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  border: 2px solid #D0104C;
   margin-bottom: 5px;
+  margin: 5px;
 }
-
-.grid-item--height2 {
-  height: 210px;
-}
-
-.grid-item--height3 {
-  height: 220px;
-}
-
-.grid-item--height4 {
-  height: 230px;
-}
-
-.grid-item--height5 {
-  height: 240px;
-}
-
-/* fitting the images */
+/* fitting the images and the text */
 .fit-img {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   max-width: 90%;
   max-height: 90%;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 10px;
+}
+
+hr {
+  border-color: #D0104C;
+  border-width: 2px;
+}
+
+#like {
+  float: right;
+  margin: 10px;
+}
+
+.content h1 {
+  padding: 10px;
 }

@@ -22,24 +22,25 @@
 	<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 
 </head>
-<body ng-app="BoilerplateApp" ng-controller="IndexController">
+<body ng-app="JapanWonder" ng-controller="IndexController">
 
 	<div id="navigationButtons">
 		<a class="btn btn-primary" href="/">JapanWonders</a>
-		<a class="btn btn-default" href="/signup" ng-show="userIsLoggedIn">My Wonders</a>
+		<a class="btn btn-default" href="/myWonders" ng-show="userLoggedIn">My Wonders</a>
 	</div>
 	<div id="accessButtons" ng-hide="userLoggedIn">
 		<a class="btn btn-primary" href="/login">Login</a>
 		<a class="btn btn-default" href="/signup">Signup</a>
 	</div>
 	<div id="accessButtons" ng-show="userLoggedIn">
-		<a class="btn btn-danger" href="/logout">Logout</a>
+		<span class="white">Hi, {{username}}!</span>
+		<a class="btn btn-danger" href="#" ng-click="logout()" style="float: right;">Logout</a>
 	</div>
 
 	<div ng-view class="view white"></div>
 
 	<div id="footer" class="white" align=center>
-		<p>Yo yo this is a fooooooooooter!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+		<p><a href="https://nicolaferracin.github.io" target="_new">Nicola Ferracin</a></p>
 	</div>
 
 	<!-- Modules -->
@@ -49,6 +50,7 @@
 	<script src="js/controllers/HomeController.js"></script>
 	<script src="js/controllers/LoginController.js"></script>
 	<script src="js/controllers/SignupController.js"></script>
+	<script src="js/controllers/MyWondersController.js"></script>
 	<script src="js/controllers/IndexController.js"></script>
 
 </body>

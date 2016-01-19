@@ -16,56 +16,50 @@ function(errorPayload) {
 console.log("Error: " + errorPayload)
 });
 */
-
-// set masonry grid width
-$('.grid').masonry({
-  itemSelector: '.grid-item',
-  columnWidth: 105
-});
+/*
 
 getItems = function() {
   var open = ['<div class="grid-item">', '<div class="grid-item grid-item--height2">', '<div class="grid-item grid-item--height3">', '<div class="grid-item grid-item--height4">', '<div class="grid-item grid-item--height5">'];
-
   var imgOpen = '<img src="./img/bg_';
   var imgClose = '.jpg" class="fit-img"/>';
-
   var close = "</div>"
   // generat random content
   var items = '';
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 50; i++) {
     // create new item elements
     items += open[Math.floor((Math.random() * open.length))] + imgOpen + Math.floor((Math.random() * 10) + 1) + imgClose + close;
-  }
+  } console.log(items);
   return items;
 }
+*/
 
-$.fn.masonryImagesReveal = function( $items ) {
-  var msnry = this.data('masonry');
-  var itemSelector = msnry.options.itemSelector;
-  // hide by default
-  $items.hide();
-  // append to container
-  this.append( $items );
-  $items.imagesLoaded().progress( function( imgLoad, image ) {
-    // get item
-    // image is imagesLoaded class, not <img>, <img> is image.img
-    var $item = $( image.img ).parents( itemSelector );
-    // un-hide item
-    $item.show();
-    // masonry does its thing
-    msnry.appended( $item );
-  });
-  return this;
-};
+var $container = $('.grid');
+/*
+// add new images
+var items = getItems();
+$container.prepend($(items));
+// use ImagesLoaded
+$container.imagesLoaded()
+  .always( function( instance ) {
+    //  console.log('all images loaded');
+    })
+    .done( function( instance ) {
+    //  console.log('all images successfully loaded');
+    })
+    .fail( function() {
+    //  console.log('all images loaded, at least one is broken');
+    })
+    .progress( function( instance, image ) {
+      var result = image.isLoaded ? 'loaded' : 'broken';
+    //  console.log( 'image is ' + result + ' for ' + image.img.src );
+    });
+    */
 
-
-var $container = $('.grid').masonry({
+// set masonry grid width
+$container.masonry({
   itemSelector: '.grid-item',
-  columnWidth: 105
+  columnWidth: 100,
+  gutter: 5
 });
-
-var $items = getItems();
-$container.masonryImagesReveal($items);
-
 
 });

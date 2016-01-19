@@ -1,10 +1,10 @@
 // angular routing
-var app = angular.module('BoilerplateApp', ['ngRoute']);
+var app = angular.module('JapanWonder', ['ngRoute']);
 
 // run for every route changes, to check if the next route is private or not
 app.run(function($rootScope, $location, $http) {
   $rootScope.$on("$routeChangeStart", function(event, next, current) {
-    var privateViews = []; // include private views/routes, as "views/private.html"
+    var privateViews = ['views/myWonders.html']; // include private views/routes, as "views/private.html"
     // if the url is private
     if (privateViews.indexOf(next.templateUrl) > -1) {
       // check if user is logged in
@@ -33,6 +33,10 @@ app.config(function ($routeProvider, $locationProvider) {
   .when('/signup', {
     controller: 'SignupController',
     templateUrl: 'views/signup.html'
+  })
+  .when('/myWonders', {
+    controller: 'MyWondersController',
+    templateUrl: 'views/myWonders.html'
   })
   .otherwise({
     controller: 'HomeController',
