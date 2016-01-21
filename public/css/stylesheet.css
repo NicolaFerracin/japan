@@ -114,7 +114,6 @@ body:after {
   float: left;
   max-width: 200px;
   min-width: 200px;
-  min-height: 200px;
   border: 2px solid #D0104C;
   margin-bottom: 5px;
   margin: 5px;
@@ -132,8 +131,13 @@ hr {
 }
 
 #like {
+  margin: 0 10px 10px 0;
   float: right;
-  margin: 10px;
+}
+
+#delete {
+  margin: 0 0px 10px 10px;
+  float: left;
 }
 
 .content h1 {

@@ -1,5 +1,5 @@
 // angular routing
-var app = angular.module('JapanWonder', ['ngRoute']);
+var app = angular.module('JapanWonder', ['ngRoute', 'wu.masonry']);
 
 // run for every route changes, to check if the next route is private or not
 app.run(function($rootScope, $location, $http) {
@@ -11,6 +11,7 @@ app.run(function($rootScope, $location, $http) {
       // if NOT logged in redirect to login page
       $http.get("/loggedIn")
       .success(function(data) {
+        console.log("here")
         if (!data) {
           $location.path("/login");
         }

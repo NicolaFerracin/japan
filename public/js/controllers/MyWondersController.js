@@ -1,16 +1,24 @@
 app.controller('MyWondersController', function($scope, $http, loggedIn, $location) {
 
-  var myWonders = [];
-  var $container = $('.grid');
+  $scope.myWonders = [];
 
-  // TODO load all wonders by user email
+  // load all wonders by username
   loggedIn.getUser().then(
     function(payload) {
       if (payload.data) {
         // get all the books owned by the user
         $http.get("/api/wonders/" + payload.data.username)
         .success(function(wonders) {
-          appendWonder(wonders);
+          loop(wonders.length - 1);
+          function loop (i) {
+            setTimeout(function () {
+              $scope.myWonders.push(wonders[i]);
+              $scope.$apply();
+              if (--i) {
+                loop(i);
+              }
+            }, 100)
+          }(wonders.length);
         })
         .error(function(err) {
           console.log("An error occured: " + err);
@@ -24,11 +32,10 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
       console.log("Error: " + errorPayload)
     });
 
-
-    // TODO show all wonders loaded above
-
     // create new wonders
     $scope.createWonder = function(wonder) {
+      // while creating disable all likes and delete and new wonder buttons
+      $scope.isProcessing = true;
       // check if user logged in
       loggedIn.getUser().then(
         function(payload) {
@@ -49,12 +56,17 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
                   $http.post("/api/wonder", wonder)
                   .success(function(status) {
                     $scope.wonder = null;
+                    jQuery.noConflict(); // avoid bootstrap conflicts
                     $('#newWonderModal').modal('hide'); // hide modal for creating new wonder
-                    appendWonder(wonder);
+                    $scope.myWonders.unshift(wonder);
                     console.log(status + " Data saved.");
+                    // re-enable all buttons
+                    $scope.isProcessing = false;
                   })
                   .error(function(err) {
                     console.log("An error occured: " + err);
+                    // re-enable all buttons
+                    $scope.isProcessing = false;
                   })
                 }
               });
@@ -64,45 +76,86 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
             }
           },
           function(errorPayload) {
-            console.log("Error: " + errorPayload)
+            console.log("Error: " + errorPayload);
+            // re-enable all buttons
+            $scope.isProcessing = false;
           });
         }
 
-        // TODO delete wonder
-
-
-
-        // refresh view to show a wonder
-        var appendWonder = function(wonder) {
-          if (wonder.constructor === Array) {
-            for (var i = 0; i < wonder.length; i++) {
-              var item = generateHtml(wonder[i]);
-              $container.prepend(item);
-            }
-          } else {
-            var item = generateHtml(wonder);
-            var $item = $(item)
-            $container.prepend($item).masonry('prepended', $item);
+        // delete wonder
+        $scope.deleteWonder = function(index) {
+          // while deleting disabled all likes and delete and new wonder buttons
+          $scope.isProcessing = true;
+          // check if user logged in
+          loggedIn.getUser().then(
+            function(payload) {
+              if (payload.data) {
+                // make sure user is owner
+                if (payload.data.username != $scope.myWonders[index].user) {
+                  $location.path("/login");
+                }
+                // delete wonder from DB using its id
+                $http.delete('/api/wonder/' + $scope.myWonders[index]._id)
+                .success(function(status) {
+                  // update view
+                  $scope.myWonders.splice(index, 1);
+                  console.log(status + " Wonder deleted.");
+                  // re-enable all buttons
+                  $scope.isProcessing = false;
+                })
+                .error(function(err) {
+                  console.log("An error occured: " + err);
+                  // re-enable all buttons
+                  $scope.isProcessing = false;
+                })
+              } else {
+                $location.path("/login");
+                return;
+              }
+            },
+            function(errorPayload) {
+              console.log("Error: " + errorPayload);
+              // re-enable all buttons
+              $scope.isProcessing = false;
+            });
           }
-          $container.masonry({
-            itemSelector: '.grid-item',
-            columnWidth: 100,
-            gutter: 5
+
+          // update likes counter
+          $scope.like = function(index) {  // while creating disable all likes and delete and new wonder buttons
+            $scope.isProcessing = true;
+            // check if user logged in
+            loggedIn.getUser().then(
+              function(payload) {
+                if (payload.data) {
+                  // make sure user is owner
+                  if (payload.data.username != $scope.myWonders[index].user) {
+                    $location.path("/login");
+                  }
+                  // update entry in database. Send id and user
+                  $http.put("/api/wonder", $scope.myWonders[index])
+                  .success(function(status) {
+                    $scope.myWonders[index].likes++;
+                    console.log(status + " Likes count updated.");
+                    // re-enable all buttons
+                    $scope.isProcessing = false;
+                  })
+                  .error(function(err) {
+                    alert("An error occured: " + err);
+                    // re-enable all buttons
+                    $scope.isProcessing = false;
+                  })
+                } else {
+                  $location.path("/login");
+                  return;
+                }
+              },
+              function(errorPayload) {
+                console.log("Error: " + errorPayload);
+                // re-enable all buttons
+                $scope.isProcessing = false;
+              });
+            }
+
+
+
           });
-
-        }
-
-        // generate random masonry tile layout for new wonder
-        var generateHtml = function(wonder) {
-          var pt1 = '<div class="grid-item  black" align="center"><div class="content"><img src="'
-          var pt2 = '" class="fit-img"/><hr><h1>'
-          var pt3 = '</h1><a href="#" onclick="click()" id="like"><span>'
-          var pt4 = ' </span><span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></div></div>'
-          return pt1 + wonder.link + pt2 + wonder.title + pt3 + wonder.likes + pt4;
-        }
-
-
-      function click() {
-        console.loog("hahah")
-      }
-      });

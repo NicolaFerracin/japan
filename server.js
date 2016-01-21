@@ -17,6 +17,7 @@ var port = process.env.PORT || 8080 // setting up the port
 mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json

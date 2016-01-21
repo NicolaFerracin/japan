@@ -5,43 +5,14 @@
   <div id="arrow-down">
   </div>
 </div>
-<div class="grid">
-
-  <div class="grid-item black" align="center">
-    <img src="./img/bg_4.jpg" class="fit-img"/>
+<div masonry masonry="{ itemSelector: '.grid-item', columnWidth: 100, gutter: 5 }" class="grid">
+  <div class="masonry-brick grid-item black" ng-repeat="wonder in myWonders" align="center" prepend="true">
+    <img ng-src="{{wonder.link}}" alt="{{wonder.title}}" class="fit-img">
     <hr>
-    <h1>Hahahah</h1>
+    <h1>{{wonder.title}}</h1>
+    <a ng-show="userLoggedIn" ng-disabled="isProcessing" id="like" href="#" ng-click="like($index)" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> {{wonder.likes}}</a>
+    <span id="like" ng-hide="userLoggedIn" class="glyphicon glyphicon-thumbs-up"> {{wonder.likes}}</span>
+    <a ng-show="user == wonder.user" ng-disabled="isProcessing" id="delete" href="#" ng-click="deleteWonder($index)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+
   </div>
-
-  <div class="grid-item  black" align="center">
-    <img src="./img/bg_4.jpg" class="fit-img"/>
-    <hr>
-    <h1>Hahahah</h1>
-  </div>
-
-  <div class="grid-item  black" align="center">
-    <img src="http://a.static.trunity.net/files/299501_299600/299598/vertical-farming-chris-jacobs.jpg" class="fit-img"/>
-    <hr>
-    <h1>Hahahah</h1>
-  </div>
-
-  <div class="grid-item  black" align="center">
-    <div class="content">
-      <img src="./img/bg_4.jpg" class="fit-img"/>
-      <hr>
-      <h1>HahaHahahahHahahahHahahahhah</h1>
-      <a href="#" id="like">
-        <span class="glyphicon glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="grid-item  black" align="center">
-    <img src="./img/bg_4.jpg" class="fit-img"/>
-    <hr>
-    <h1>Hahahah</h1>
-  </div>
-
-
-
 </div>
