@@ -6,7 +6,7 @@ app.controller('IndexController', function($scope, $http, loggedIn, $location) {
     function(payload) {
       if (payload.data) {
         $scope.userLoggedIn = true;
-        $scope.username = payload.data.username;
+        $scope.username = payload.data;
       } else {
         console.log("The user is not logged in")
       }

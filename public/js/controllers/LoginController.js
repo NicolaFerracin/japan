@@ -35,4 +35,8 @@ app.controller('LoginController', function($scope, $http, $window) {
       $scope.errorAlert = data[0];
     });
   };
+
+  $scope.twitter = function() {
+    $window.location.href = "/auth/twitter";
+  }
 });

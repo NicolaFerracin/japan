@@ -64,13 +64,13 @@ app.put('/api/wonder', function(req, res) {
 		// get the username and check if it already liked this wonder
 		var user = isLoggedIn(req);
 		if (user) {
-			if (wonder.likers.indexOf(user.username) > -1) {
+			if (wonder.likers.indexOf(user) > -1) {
 				res.status(404).send("Uh oh, it looks like you already liked this Wonder.");
 				return;
 			}
 		}
 		wonder.likes++;
-		wonder.likers.push(user.username);
+		wonder.likers.push(user);
 		wonder.save(function (err) {
 			if (err) {
 				res.send(err);
@@ -136,6 +136,20 @@ app.post('/api/signup', function(req, res, next) {
 	})(req, res, next);
 });
 
+// =====================================
+// TWITTER ROUTES ======================
+// =====================================
+// route for twitter authentication and login
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+// handle the callback after twitter has authenticated the user
+app.get('/auth/twitter/callback',
+passport.authenticate('twitter', {
+	successRedirect : '/',
+	failureRedirect : '/'
+}));
+
+
 // check if the user is logged in an retrieve a different user obj based on the status
 app.get('/loggedin', function(req, res) {
 	res.json(isLoggedIn(req));
@@ -149,9 +163,7 @@ app.get('/logout', function(req, res) {
 
 isLoggedIn = function(req) {
 	if (req.isAuthenticated()) {
-		var user = JSON.parse(JSON.stringify(req.user));
-		// hide sensible information
-		delete user.local.password;
+		var user = JSON.parse(JSON.stringify(req.user)).username;
 		return user;
 	}
 	return null;

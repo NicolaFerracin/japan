@@ -7,14 +7,18 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
     function(payload) {
       if (payload.data) {
         // get all the books owned by the user
-        $http.get("/api/wonders/" + payload.data.username)
+        $http.get("/api/wonders/" + payload.data)
         .success(function(wonders) {
+          if (wonders.length == 0) {
+            return;
+          }
           loop(wonders.length - 1);
           function loop (i) {
             setTimeout(function () {
               $scope.myWonders.push(wonders[i]);
               $scope.$apply();
-              if (--i) {
+              if (i > 0) {
+                i--;
                 loop(i);
               }
             }, 100)
@@ -51,7 +55,7 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
                   $scope.showUrlError = false;
                   // update Wonder obj with missing info
                   wonder.likes = 0;
-                  wonder.user = payload.data.username;
+                  wonder.user = payload.data;
                   // store in database
                   $http.post("/api/wonder", wonder)
                   .success(function(status) {
@@ -91,7 +95,7 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
             function(payload) {
               if (payload.data) {
                 // make sure user is owner
-                if (payload.data.username != $scope.myWonders[index].user) {
+                if (payload.data != $scope.myWonders[index].user) {
                   $location.path("/login");
                 }
                 // delete wonder from DB using its id
@@ -128,7 +132,7 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
               function(payload) {
                 if (payload.data) {
                   // make sure user is owner
-                  if (payload.data.username != $scope.myWonders[index].user) {
+                  if (payload.data != $scope.myWonders[index].user) {
                     $location.path("/login");
                   }
                   // update entry in database. Send id and user

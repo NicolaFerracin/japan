@@ -24,6 +24,10 @@ body {
   max-width: 100%;
 }
 
+#twitter {
+  margin-top: 20px;
+}
+
 /* body opacity */
 body:after {
   position: fixed;

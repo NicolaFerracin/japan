@@ -7,7 +7,7 @@ app.controller('HomeController', function($scope, $http, loggedIn, $location) {
     function(payload) {
       if (payload.data) {
         $scope.userLoggedIn = true;
-        $scope.user = payload.data.username
+        $scope.user = payload.data
       }
     },
     function(errorPayload) {
@@ -23,7 +23,8 @@ app.controller('HomeController', function($scope, $http, loggedIn, $location) {
         setTimeout(function () {
           $scope.myWonders.push(wonders[i]);
           $scope.$apply();
-          if (--i) {
+          if (i > 0) {
+            i--;
             loop(i);
           }
         }, 100)
@@ -44,7 +45,7 @@ app.controller('HomeController', function($scope, $http, loggedIn, $location) {
         function(payload) {
           if (payload.data) {
             // make sure user is owner
-            if (payload.data.username != $scope.myWonders[index].user) {
+            if (payload.data != $scope.myWonders[index].user) {
               $location.path("/login");
             }
             // delete wonder from DB using its id
@@ -80,10 +81,6 @@ app.controller('HomeController', function($scope, $http, loggedIn, $location) {
         loggedIn.getUser().then(
           function(payload) {
             if (payload.data) {
-              // make sure user is owner
-              if (payload.data.username != $scope.myWonders[index].user) {
-                $location.path("/login");
-              }
               // update entry in database. Send id and user
               $http.put("/api/wonder", $scope.myWonders[index])
               .success(function(status) {

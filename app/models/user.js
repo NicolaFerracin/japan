@@ -11,7 +11,12 @@ var userSchema = mongoose.Schema({
         email        : String,
         password     : String
     },
-    username : String
+    username : String,
+    twitter          : {
+        id           : String,
+        token        : String,
+        displayName  : String
+    }
 });
 
 // methods ======================

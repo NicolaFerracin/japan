@@ -43,6 +43,10 @@ app.controller('SignupController', function($scope, $http, $window) {
     });
   };
 
+  $scope.twitter = function() {
+    $window.location.href = "/auth/twitter";
+  }
+
   var resetErrors = function() {
     $scope.submitted = false;
     $scope.showPasswordAlert = false;

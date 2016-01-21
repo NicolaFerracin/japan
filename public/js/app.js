@@ -11,7 +11,6 @@ app.run(function($rootScope, $location, $http) {
       // if NOT logged in redirect to login page
       $http.get("/loggedIn")
       .success(function(data) {
-        console.log("here")
         if (!data) {
           $location.path("/login");
         }
