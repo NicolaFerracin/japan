@@ -41,14 +41,14 @@
 <body ng-app="JapanWonder" ng-controller="IndexController">
 
 	<div id="navigationButtons">
-		<a class="btn btn-primary" href="/">JapanWonders</a>
+		<a class="btn btn-primary white" href="/" >JapanWonders</a>
 		<a class="btn btn-default" href="/myWonders" ng-show="userLoggedIn">My Wonders</a>
 	</div>
 	<div id="accessButtons" ng-hide="userLoggedIn">
-		<a class="btn btn-primary" href="/login">Login</a>
+		<a class="btn btn-primary white" href="/login" >Login</a>
 		<a class="btn btn-default" href="/signup">Signup</a>
 	</div>
-	<div id="accessButtons" ng-show="userLoggedIn">
+	<div id="accessButtons" ng-show="userLoggedIn" class="white">
 		<span class="white">Hi, {{username}}!</span>
 		<a class="btn btn-danger" href="#" ng-click="logout()" style="float: right;">Logout</a>
 	</div>
@@ -56,7 +56,7 @@
 	<div ng-view class="view white"></div>
 
 	<div id="footer" class="white" align=center>
-		<p><a href="https://nicolaferracin.github.io" target="_new">Nicola Ferracin</a></p>
+		<h2><a href="https://nicolaferracin.github.io" target="_new"><u>Nicola Ferracin</u></a> | <a href="https://github/nicolaferracin" target="_new"><u>GitHub</u></a></h2>
 
 	</div>
 
@@ -68,6 +68,7 @@
 	<script src="js/controllers/LoginController.js"></script>
 	<script src="js/controllers/SignupController.js"></script>
 	<script src="js/controllers/MyWondersController.js"></script>
+	<script src="js/controllers/UserController.js"></script>
 	<script src="js/controllers/IndexController.js"></script>
 
 

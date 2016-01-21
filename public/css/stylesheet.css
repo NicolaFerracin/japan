@@ -40,6 +40,14 @@ body:after {
   z-index: -1;
 }
 
+
+a,
+a:hover,
+a:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /* colors */
 .white {
   color: white !important;

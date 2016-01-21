@@ -5,7 +5,9 @@ app.controller('MyWondersController', function($scope, $http, loggedIn, $locatio
   // load all wonders by username
   loggedIn.getUser().then(
     function(payload) {
-      if (payload.data) {
+      if (payload.data) {        
+        $scope.userLoggedIn = true;
+        $scope.user = payload.data
         // get all the books owned by the user
         $http.get("/api/wonders/" + payload.data)
         .success(function(wonders) {

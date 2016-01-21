@@ -38,6 +38,10 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'MyWondersController',
     templateUrl: 'views/myWonders.html'
   })
+  .when('/user/:user?', {
+    controller: 'UserController',
+    templateUrl: 'views/user.html'
+  })
   .otherwise({
     controller: 'HomeController',
     templateUrl: 'views/home.html'

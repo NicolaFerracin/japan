@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <div class="page-header">
+      <h1>{{requestedUser}}</h1>
+    </div>
+    <div masonry masonry="{ itemSelector: '.grid-item', columnWidth: 100, gutter: 5 }" class="grid">
+      <div class="masonry-brick grid-item black" ng-repeat="wonder in myWonders" align="center" prepend="true">
+        <img ng-src="{{wonder.link}}" alt="{{wonder.title}}" class="fit-img">
+        <hr>
+        <h1>{{wonder.title}}</h1>
+        <div><a href="/user/{{wonder.user}}"><span>by {{wonder.user}}</span></a></div>
+        <a ng-show="userLoggedIn" ng-disabled="isProcessing" id="like" href="#" ng-click="like($index)" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> {{wonder.likes}}</a>
+        <span id="like" ng-hide="userLoggedIn" class="glyphicon glyphicon-thumbs-up"> {{wonder.likes}}</span>
+        <a ng-show="user == wonder.user" ng-disabled="isProcessing" id="delete" href="#" ng-click="deleteWonder($index)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+      </div>
+    </div>
+  </div>
+</div>
